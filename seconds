@@ -1,0 +1,20 @@
+DELIMITER //
+
+CREATE PROCEDURE FormatSeconds(IN total_seconds INT, OUT formatted_time VARCHAR(100))
+BEGIN
+    DECLARE days INT;
+    DECLARE hours INT;
+    DECLARE minutes INT;
+    DECLARE seconds INT;
+
+    SET days = total_seconds DIV (24 * 3600);
+    SET total_seconds = total_seconds MOD (24 * 3600);
+    SET hours = total_seconds DIV 3600;
+    SET total_seconds = total_seconds MOD 3600;
+    SET minutes = total_seconds DIV 60;
+    SET seconds = total_seconds MOD 60;
+
+    SET formatted_time = CONCAT(days, ' days ', hours, ' hours ', minutes, ' minutes ', seconds, ' seconds');
+END //
+
+DELIMITER ;
